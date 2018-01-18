@@ -16,9 +16,9 @@ const rand = ( s, e ) => {
 const colorHolder = document.querySelector('.js-color-holder');
 const squareHolder = document.querySelector('.js-square-holder');
 const colorName = document.querySelector('.js-copy-color');
-const button = document.querySelector('.js-copy-button')
+const copyButton = document.querySelector('.js-copy-button')
 const copyNumberValue = document.querySelector('.js-color-number-input')
-const MAX_ALLOWED_COLORS = 20;
+const clearButton = document.querySelector('.js-clear-button')
 let colorHistory = []
 
 const genRanColor = event => {
@@ -28,7 +28,7 @@ const genRanColor = event => {
   const randomColor = `rgb(${R},${G},${B})`
 
   colorHolder.style.backgroundColor = randomColor;
-  squareHolder.innerHTML += `<div class="square" style="background-color: ${randomColor}"></div>`
+  squareHolder.innerHTML += `<div class="square mr-1" style="background-color: ${randomColor}"></div>`
 
   if (R < 125 || G < 125 || B < 125) {
       colorHolder.style.color = "white";
@@ -40,37 +40,57 @@ const genRanColor = event => {
   colorHolder.innerHTML = randomColor;
   colorHistory.push(randomColor);
 
-
-  if (colorHistory.length > MAX_ALLOWED_COLORS) {
-      squareHolder.innerHTML = ''
-      colorHolder.style.backgroundColor = 'black'
-      colorHolder.innerHTML = 'Click to Generate Color'
-      colorHolder.style.color = "white";
-      colorHistory = []
-  }
-
 }
+
 const copyRgbColor = (event) => {
     colorName.value = colorHolder.style.backgroundColor
     colorName.select();
     document.execCommand("Copy");
 }
 
-const copyValue = () => {
+const copyValue = (event) => {
     if (copyNumberValue.value > colorHistory.length) {
         alert("No color at the position to copy")
     }
     else {
-    const num = copyNumberValue.value
-    const copyHistoryValue = (num) => {
-        colorName.value = colorHistory[num-1]
-        colorName.select()
-        document.execCommand('Copy')
-    }
-    copyHistoryValue(num)
+        const num = copyNumberValue.value
+        const copyHistoryValue = (num) => {
+            colorName.value = colorHistory[num-1]
+            colorName.select()
+            document.execCommand('Copy')
+        }
+        copyHistoryValue(num)
+        copyNumberValue.value = ''
     }
 }
 
+const copyValueEnter = (event) => {
+    if ( event.keyCode === 13) {
+        if (copyNumberValue.value > colorHistory.length) {
+            alert("No color at the position to copy")
+        }
+        else {
+            const num = copyNumberValue.value
+            const copyHistoryValue = (num) => {
+                colorName.value = colorHistory[num-1]
+                colorName.select()
+                document.execCommand('Copy')
+        }
+        copyHistoryValue(num)
+        copyNumberValue.value = ''
+        }
+    }
+}
+
+const clearColors = (event) => {
+    squareHolder.innerHTML = ''
+    colorHolder.style.backgroundColor = 'black'
+    colorHolder.innerHTML = 'Click to Generate Color'
+    colorHolder.style.color = "white";
+    colorHistory = []
+}
 colorHolder.addEventListener('click', genRanColor);
 colorHolder.addEventListener('click', copyRgbColor);
-button.addEventListener('click', copyValue)
+copyButton.addEventListener('click', copyValue)
+clearButton.addEventListener('click', clearColors)
+copyNumberValue.addEventListener('keydown', copyValueEnter)

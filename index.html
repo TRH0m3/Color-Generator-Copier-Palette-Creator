@@ -1,18 +1,29 @@
 <!doctype html>
-<html>
-
-<head>
-<link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
-<link href="css/main.css" rel="stylesheet" type="text/css"/>
-</head>
-
-<body>
-<h1 class="title">Random Color Generator/Copier</h1>
-<div class="js-color-holder color-holder">Click to Generate Color</div>
-<input class="js-color-number-input color-number-input"; placeholder="Color to Copy"></textarea>
-<button class="js-copy-button copy-button">Copy Other Color</button>
-<div class="js-square-holder square-holder"></div>
-<textarea class="js-copy-color copy-color"></textarea>
-<script  src ="js/main.js"></script>
-</body>
-</html>
+  <html lang = 'en'>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+      <link href="css/main.css" rel="stylesheet" type="text/css"/>
+      <nav class="navbar navbar-light bg-light justify-content-center">Random Color Generator & Copier</a></nav>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <div class="container-fluid js-color-holder color-holder mx-auto m-2">Click to Generate Color</div>
+        <div class="input-group my-2 mx-auto">
+            <input type="text" class="form-control js-color-number-input" placeholder="Color to Copy" aria-label="Color to Copy" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary js-copy-button" type="button">Copy Color</button>
+                <button class="btn btn-outline-secondary js-clear-button mx-auto" type="button">Clear Colors</button>
+            </div>
+        </div>
+            <div class="js-square-holder square-holder m-auto"></div>
+            <textarea class="js-copy-color copy-color"></textarea>
+      </div>
+      <script  src ="js/main.js"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    </body>
+  </html>
