@@ -1,7 +1,7 @@
 nav {
     font-family: 'Work Sans', sans-serif;
-    font-size: 20px;
-    display: inline-inline-block;
+    font-size: 45px;
+    display: inline-block;
 }
 .input-group {
     width: 375px;
@@ -27,6 +27,12 @@ nav {
     height: 50px;
     font-family: 'Work Sans', sans-serif;
 }
-.copy-color {
+.copy-pallete {
     opacity: 0;
+}
+.no-margin {
+    margin: 0 auto;
+}
+.custom-height {
+    height: 165px;
 }

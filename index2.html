@@ -5,26 +5,29 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-      <link href="css/main.css" rel="stylesheet" type="text/css"/>
-        <div class="row">
+      <link href="css/main2.css" rel="stylesheet" type="text/css"/>
+      <div class="row">
           <nav class="navbar navbar-light bg-light justify-content-center col"><a class="navbar-brand" href="index.html">Random Color Generator & Copier</a></nav>
           <nav class="navbar navbar-light bg-light justify-content-center col"><a class="navbar-brand" href="index2.html">Color Pallete Creator</a></nav>
         </div>
     </head>
     <body>
       <div class="container-fluid">
-        <div class="container-fluid js-color-holder color-holder mx-auto my-2">Click to Generate Color</div>
-        <div class="input-group my-2 mx-auto">
-            <input type="text" class="form-control js-color-number-input" placeholder="Color to Copy" aria-label="Color to Copy" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary js-copy-button" type="button">Copy Color</button>
-                <button class="btn btn-outline-secondary js-clear-button mx-auto" type="button">Clear Colors</button>
+          <div class="row no-margin">
+                <div class=" js-color-pallete1 color-holder mx-auto d-inline-block col custom-height">Color 1</div>
+                <div class=" js-color-pallete2 color-holder mx-auto d-inline-block col custom-height">Color 2</div>
             </div>
+            <div class="row no-margin">
+                <div class=" js-color-pallete3 color-holder mx-auto d-inline-block col custom-height">Color 3</div>
+                <div class=" js-color-pallete4 color-holder mx-auto d-inline-block col custom-height">Color 4</div>
+            </div>
+            <button class="btn btn-outline-secondary js-copy-button my-2 d-inline-block" type="button">Copy Pallete</button>
+            <button class="btn btn-outline-secondary js-clear-button my-2 d-inline-block" type="button">Clear Pallete</button>
         </div>
             <div class="js-square-holder square-holder m-auto"></div>
-            <textarea class="js-copy-color copy-color"></textarea>
-      </div>
-      <script  src ="js/main.js"></script>
+            <textarea class="js-copy-pallete copy-pallete"></textarea>
+        </div>
+      <script  src ="js/main2.js"></script>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>

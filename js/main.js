@@ -1,7 +1,6 @@
 /*
 Click to generate random color.
 It will copy color rgb value and display the color, changing color of text based on color value.
-It will display up to 20 previous colors that were generated.
 Using the input field you can specify a color number previously generated
 to copy and then click copy color and it will copy the color rgb value you chose.
 
@@ -13,12 +12,6 @@ const rand = ( s, e ) => {
     return random;
 }
 
-const colorHolder = document.querySelector('.js-color-holder');
-const squareHolder = document.querySelector('.js-square-holder');
-const colorName = document.querySelector('.js-copy-color');
-const copyButton = document.querySelector('.js-copy-button')
-const copyNumberValue = document.querySelector('.js-color-number-input')
-const clearButton = document.querySelector('.js-clear-button')
 let colorHistory = []
 
 const genRanColor = event => {
@@ -89,6 +82,14 @@ const clearColors = (event) => {
     colorHolder.style.color = "white";
     colorHistory = []
 }
+
+const colorHolder = document.querySelector('.js-color-holder');
+const squareHolder = document.querySelector('.js-square-holder');
+const colorName = document.querySelector('.js-copy-color');
+const copyButton = document.querySelector('.js-copy-button')
+const copyNumberValue = document.querySelector('.js-color-number-input')
+const clearButton = document.querySelector('.js-clear-button')
+
 colorHolder.addEventListener('click', genRanColor);
 colorHolder.addEventListener('click', copyRgbColor);
 copyButton.addEventListener('click', copyValue)
