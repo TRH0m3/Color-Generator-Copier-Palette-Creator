@@ -21,6 +21,9 @@ const genRanColor = evt => {
   const randomColor = `rgb(${R},${G},${B})`
 
   colorHolder.style.backgroundColor = randomColor;
+  if (squareHolder.innerHTML == '') {
+  squareHolder.innerHTML += '<p class="my-2">Click Square Below to Copy Color</p>'
+}
   squareHolder.innerHTML += `<div class="js-small-square small-square mr-1" style="background-color: ${randomColor}"></div>`
 
   if (R < 125 || G < 125 || B < 125) {
@@ -32,7 +35,6 @@ const genRanColor = evt => {
 
   colorHolder.innerHTML = randomColor;
   colorHistory.push(randomColor);
-
 }
 
 const copyRgbContainerColor = (evt) => {
@@ -54,7 +56,8 @@ const clearColors = (evt) => {
     colorHolder.style.backgroundColor = 'black'
     colorHolder.innerHTML = 'Click to Generate Color'
     colorHolder.style.color = "white";
-    colorHistory = []
+    colorRgbText.value = ''
+    customColorInput.value = ''
 }
 
 const customColorKeyPress = (evt) => {
