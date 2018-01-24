@@ -20,7 +20,7 @@ nav {
     -webkit-user-select: none;
     -moz-user-select: none;
 }
-.square {
+.small-square {
     display: inline-block;
     border-radius: 2px;
     width: 50px;

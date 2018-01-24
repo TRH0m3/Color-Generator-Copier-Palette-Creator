@@ -13,17 +13,14 @@
     </head>
     <body>
       <div class="container-fluid">
-        <div class="container-fluid js-color-holder color-holder mx-auto my-2">Click to Generate Color</div>
-        <div class="input-group my-2 mx-auto">
-            <input type="text" class="form-control js-color-number-input" placeholder="Color to Copy" aria-label="Color to Copy" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary js-copy-button" type="button">Copy Color</button>
-                <button class="btn btn-outline-secondary js-clear-button mx-auto" type="button">Clear Colors</button>
+        <div class="container-fluid js-color-holder color-holder mx-auto mt-2">Click to Generate Color</div>
+                <button class="btn btn-outline-secondary js-clear-button mx-auto mt-2" type="button">Clear Colors</button>
+                <input type="text" class="js-custom-color-input form-control w-50 my-2" placeholder="Display Custom Color: Input as rgb(0-255,0-255,0-255)">
+            <div class="js-square-holder square-holder my-2 mx-auto">
+                <div class="js-small-square small-square" style="display:none"></div>
             </div>
-        </div>
-            <div class="js-square-holder square-holder m-auto"></div>
             <textarea class="js-copy-color copy-color"></textarea>
-      </div>
+        </div>
       <script  src ="js/main.js"></script>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

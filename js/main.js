@@ -14,14 +14,14 @@ const rand = ( s, e ) => {
 
 let colorHistory = []
 
-const genRanColor = event => {
+const genRanColor = evt => {
   const R = rand(0,255);
   const G = rand(0,255);
   const B = rand(0,255);
   const randomColor = `rgb(${R},${G},${B})`
 
   colorHolder.style.backgroundColor = randomColor;
-  squareHolder.innerHTML += `<div class="square mr-1" style="background-color: ${randomColor}"></div>`
+  squareHolder.innerHTML += `<div class="js-small-square small-square mr-1" style="background-color: ${randomColor}"></div>`
 
   if (R < 125 || G < 125 || B < 125) {
       colorHolder.style.color = "white";
@@ -35,47 +35,21 @@ const genRanColor = event => {
 
 }
 
-const copyRgbColor = (event) => {
-    colorName.value = colorHolder.style.backgroundColor
-    colorName.select();
+const copyRgbContainerColor = (evt) => {
+    colorRgbText.value = evt.target.style.backgroundColor
+    colorRgbText.select();
     document.execCommand("Copy");
+    }
+
+const copySmallSquareColor = (evt) => {
+    const colorRgb = evt.target.style.backgroundColor
+    colorRgbText.value = colorRgb
+    colorRgbText.select()
+    document.execCommand('Copy')
+    colorRgbText.value = ''
 }
 
-const copyValue = (event) => {
-    if (copyNumberValue.value > colorHistory.length) {
-        alert("No color at the position to copy")
-    }
-    else {
-        const num = copyNumberValue.value
-        const copyHistoryValue = (num) => {
-            colorName.value = colorHistory[num-1]
-            colorName.select()
-            document.execCommand('Copy')
-        }
-        copyHistoryValue(num)
-        copyNumberValue.value = ''
-    }
-}
-
-const copyValueEnter = (event) => {
-    if ( event.keyCode === 13) {
-        if (copyNumberValue.value > colorHistory.length) {
-            alert("No color at the position to copy")
-        }
-        else {
-            const num = copyNumberValue.value
-            const copyHistoryValue = (num) => {
-                colorName.value = colorHistory[num-1]
-                colorName.select()
-                document.execCommand('Copy')
-        }
-        copyHistoryValue(num)
-        copyNumberValue.value = ''
-        }
-    }
-}
-
-const clearColors = (event) => {
+const clearColors = (evt) => {
     squareHolder.innerHTML = ''
     colorHolder.style.backgroundColor = 'black'
     colorHolder.innerHTML = 'Click to Generate Color'
@@ -83,15 +57,29 @@ const clearColors = (event) => {
     colorHistory = []
 }
 
+const customColorKeyPress = (evt) => {
+    if (evt.keyCode === 13) {
+        const customColor = customColorInput.value
+        colorHolder.innerHTML = customColor
+        colorHolder.style.backgroundColor = customColor
+        colorRgbText.value = customColor
+        colorRgbText.select()
+        document.execCommand('Copy')
+        colorRgbText.value = ''
+        customColorInput.value = ''
+    }
+}
+
 const colorHolder = document.querySelector('.js-color-holder');
 const squareHolder = document.querySelector('.js-square-holder');
-const colorName = document.querySelector('.js-copy-color');
+const colorRgbText = document.querySelector('.js-copy-color');
 const copyButton = document.querySelector('.js-copy-button')
 const copyNumberValue = document.querySelector('.js-color-number-input')
 const clearButton = document.querySelector('.js-clear-button')
+const customColorInput = document.querySelector('.js-custom-color-input')
 
 colorHolder.addEventListener('click', genRanColor);
-colorHolder.addEventListener('click', copyRgbColor);
-copyButton.addEventListener('click', copyValue)
+colorHolder.addEventListener('click', copyRgbContainerColor);
 clearButton.addEventListener('click', clearColors)
-copyNumberValue.addEventListener('keydown', copyValueEnter)
+squareHolder.addEventListener('click', copySmallSquareColor)
+customColorInput.addEventListener('keypress', customColorKeyPress)
