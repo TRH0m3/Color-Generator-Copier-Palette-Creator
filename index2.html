@@ -8,24 +8,40 @@
       <link href="css/main2.css" rel="stylesheet" type="text/css"/>
       <div class="row">
           <nav class="navbar navbar-light bg-light justify-content-center col"><a class="navbar-brand" href="index.html">Random Color Generator & Copier</a></nav>
-          <nav class="navbar navbar-light bg-light justify-content-center col"><a class="navbar-brand" href="index2.html">Color Pallete Creator</a></nav>
+          <nav class="navbar navbar-light bg-light justify-content-center col"><a class="navbar-brand" href="index2.html">Color palette Creator</a></nav>
         </div>
     </head>
     <body>
-      <div class="container-fluid">
-          <div class="row no-margin">
-                <div class=" js-color-pallete1 color-holder mx-auto d-inline-block col custom-height">Color 1</div>
-                <div class=" js-color-pallete2 color-holder mx-auto d-inline-block col custom-height">Color 2</div>
+      <div class="js-palettes-container palettes-container container-fluid mt-2">
+            <div class="row row-a no-gutters p-1">
+                <div class=" js-color-palette1-a first-palette color-palette col-3 text-center">Color 1</div>
+                <div class=" js-color-palette2-a color-palette col-3 text-center">Color 2</div>
+                <div class=" js-color-palette3-a color-palette col-3 text-center">Color 3</div>
+                <div class=" js-color-palette4-a last-palette color-palette col-3 text-center">Color 4</div>
             </div>
-            <div class="row no-margin">
-                <div class=" js-color-pallete3 color-holder mx-auto d-inline-block col custom-height">Color 3</div>
-                <div class=" js-color-pallete4 color-holder mx-auto d-inline-block col custom-height">Color 4</div>
+            <button class="btn btn-outline-secondary js-copy-button-a my-2 ml-1 d-inline-block" type="button">Copy palette</button>
+            <button class="btn btn-outline-secondary js-clear-button-a my-2 d-inline-block" type="button">Clear palette</button>
+
+            <div class="row row-b no-gutters p-1">
+                <div class=" js-color-palette1-b first-palette color-palette col-3 text-center">Color 1</div>
+                <div class=" js-color-palette2-b color-palette col-3 text-center">Color 2</div>
+                <div class=" js-color-palette3-b color-palette col-3 text-center">Color 3</div>
+                <div class=" js-color-palette4-b last-palette color-palette col-3 text-center">Color 4</div>
             </div>
-            <button class="btn btn-outline-secondary js-copy-button my-2 d-inline-block" type="button">Copy Pallete</button>
-            <button class="btn btn-outline-secondary js-clear-button my-2 d-inline-block" type="button">Clear Pallete</button>
+            <button class="btn btn-outline-secondary js-copy-button-b my-2 ml-1 d-inline-block" type="button">Copy palette</button>
+            <button class="btn btn-outline-secondary js-clear-button-b my-2 d-inline-block" type="button">Clear palette</button>
+
+            <div class="row row-c no-gutters p-1">
+                <div class=" js-color-palette1-c first-palette color-palette col-3 text-center">Color 1</div>
+                <div class=" js-color-palette2-c color-palette col-3 text-center">Color 2</div>
+                <div class=" js-color-palette3-c color-palette col-3 text-center">Color 3</div>
+                <div class=" js-color-palette4-c last-palette color-palette col-3 text-center">Color 4</div>
+            </div>
+            <input type="text" class="js-custom-input form-control w-50 my-2" placeholder="Display Custom Color palette: As rgb(0-255,0-255,0-255)">
+            <button class="btn btn-outline-secondary js-copy-button-c my-2 ml-1 d-inline-block" type="button">Copy palette</button>
+            <button class="btn btn-outline-secondary js-clear-button-c my-2 d-inline-block" type="button">Clear palette</button>
         </div>
-            <div class="js-square-holder square-holder m-auto"></div>
-            <textarea class="js-copy-pallete copy-pallete"></textarea>
+            <textarea class="js-copy-palette copy-palette"></textarea>
         </div>
       <script  src ="js/main2.js"></script>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

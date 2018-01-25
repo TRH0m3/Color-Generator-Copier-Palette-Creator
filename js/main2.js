@@ -13,55 +13,55 @@ const rand = ( s, e ) => {
     return random;
 }
 
-const colorPalleteArray = []
+const colorpaletteArray = []
 
-const genRanColor = event => {
+const genRanColor = evt => {
   const R = rand(0,255);
   const G = rand(0,255);
   const B = rand(0,255);
   const randomColor = `rgb(${R},${G},${B})`
 
-  event.target.style.backgroundColor = randomColor;
+  evt.target.style.backgroundColor = randomColor;
 
   if (R < 125 || G < 125 || B < 125) {
-      event.target.style.color = "white";
+      evt.target.style.color = "white";
   }
   else {
-      event.target.style.color = "black";
+      evt.target.style.color = "black";
   }
 
-  event.target.innerHTML = randomColor;
+  evt.target.innerHTML = randomColor;
 
-  if (event.target.matches('.js-color-pallete1')) {
-      colorPalleteArray[0] = randomColor
+  if (evt.target.matches('.js-color-palette1-a')) {
+      colorpaletteArray[0] = randomColor
   }
- else  if (event.target.matches('.js-color-pallete2')) {
-      colorPalleteArray[1] = randomColor
+ else  if (evt.target.matches('.js-color-palette2-a')) {
+      colorpaletteArray[1] = randomColor
   }
- else  if (event.target.matches('.js-color-pallete3')) {
-      colorPalleteArray[2] = randomColor
+ else  if (evt.target.matches('.js-color-palette3-a')) {
+      colorpaletteArray[2] = randomColor
   }
-  else if (event.target.matches('.js-color-pallete4')) {
-      colorPalleteArray[3] = randomColor
+  else if (evt.target.matches('.js-color-palette4-a')) {
+      colorpaletteArray[3] = randomColor
   }
-  console.log(colorPalleteArray)
+  console.log(colorpaletteArray)
 
 }
 
-const copyValue = (event) => {
-    const rgbPalleteToString = colorPalleteArray.join(', ')
-    console.log(rgbPalleteToString)
-    const copyPalleteColors = (str) => {
-        copyPallete.value = str
-        copyPallete.select()
+const copyValue = (evt) => {
+    const rgbpaletteToString = colorpaletteArray.join(', ')
+    console.log(rgbpaletteToString)
+    const copypaletteColors = (str) => {
+        copypalette.value = str
+        copypalette.select()
         document.execCommand('Copy')
     }
-    copyPalleteColors(rgbPalleteToString)
-    copyPallete.value = ''
+    copypaletteColors(rgbpaletteToString)
+    copypalette.value = ''
 }
 
-const copyValueEnter = (event) => {
-    if ( event.keyCode === 13) {
+const copyValueEnter = (evt) => {
+    if ( evt.keyCode === 13) {
         if (copyNumberValue.value > colorHistory.length) {
             alert("No color at the position to copy")
         }
@@ -78,41 +78,43 @@ const copyValueEnter = (event) => {
     }
 }
 
-const clearColors = (event) => {
-    console.log("clicked!")
-    palleteHolder1.innerHTML = ''
-    palleteHolder1.style.backgroundColor = 'black'
-    palleteHolder1.innerHTML = 'Color 1'
-    palleteHolder1.style.color = "white";
+const clearColors = (evt) => {
+    if (evt.target.matches('.js-clear-button-a')) {
+        console.log("clicked!")
+        paletteHolder1a.innerHTML = ''
+        paletteHolder1a.style.backgroundColor = 'black'
+        paletteHolder1a.innerHTML = 'Color 1'
+        paletteHolder1a.style.color = "white";
 
-    palleteHolder2.innerHTML = ''
-    palleteHolder2.style.backgroundColor = 'black'
-    palleteHolder2.innerHTML = 'Color 2'
-    palleteHolder2.style.color = "white";
+        paletteHolder2a.innerHTML = ''
+        paletteHolder2a.style.backgroundColor = 'black'
+        paletteHolder2a.innerHTML = 'Color 2'
+        paletteHolder2a.style.color = "white";
 
-    palleteHolder3.innerHTML = ''
-    palleteHolder3.style.backgroundColor = 'black'
-    palleteHolder3.innerHTML = 'Color 3'
-    palleteHolder3.style.color = "white";
+        paletteHolder3a.innerHTML = ''
+        paletteHolder3a.style.backgroundColor = 'black'
+        paletteHolder3a.innerHTML = 'Color 3'
+        paletteHolder3a.style.color = "white";
 
-    palleteHolder4.innerHTML = ''
-    palleteHolder4.style.backgroundColor = 'black'
-    palleteHolder4.innerHTML = 'Color 4'
-    palleteHolder4.style.color = "white";
+        paletteHolder4a.innerHTML = ''
+        paletteHolder4a.style.backgroundColor = 'black'
+        paletteHolder4a.innerHTML = 'Color 4'
+        paletteHolder4a.style.color = "white";
+    };
 }
 
-const palleteHolder1 = document.querySelector('.js-color-pallete1');
-const palleteHolder2 = document.querySelector('.js-color-pallete2');
-const palleteHolder3 = document.querySelector('.js-color-pallete3');
-const palleteHolder4 = document.querySelector('.js-color-pallete4');
+const paletteHolder1a = document.querySelector('.js-color-palette1-a');
+const paletteHolder2a = document.querySelector('.js-color-palette2-a');
+const paletteHolder3a = document.querySelector('.js-color-palette3-a');
+const paletteHolder4a = document.querySelector('.js-color-palette4-a');
 const squareHolder = document.querySelector('.js-square-holder');
-const copyPallete = document.querySelector('.js-copy-pallete');
-const copyButton = document.querySelector('.js-copy-button')
-const clearPalleteButton = document.querySelector('.js-clear-button')
+const copypalette = document.querySelector('.js-copy-palette');
+const copyButtona = document.querySelector('.js-copy-button-a')
+const clearpaletteButtona = document.querySelector('.js-clear-button-a')
 
-palleteHolder1.addEventListener('click', genRanColor);
-palleteHolder2.addEventListener('click', genRanColor);
-palleteHolder3.addEventListener('click', genRanColor);
-palleteHolder4.addEventListener('click', genRanColor);
-copyButton.addEventListener('click', copyValue)
-clearPalleteButton.addEventListener('click', clearColors)
+paletteHolder1a.addEventListener('click', genRanColor);
+paletteHolder2a.addEventListener('click', genRanColor);
+paletteHolder3a.addEventListener('click', genRanColor);
+paletteHolder4a.addEventListener('click', genRanColor);
+copyButtona.addEventListener('click', copyValue)
+clearpaletteButtona.addEventListener('click', clearColors)
