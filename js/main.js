@@ -34,7 +34,7 @@ const rgbState = {
     getColorURL: () => {
         const getURL = `http://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
         console.log(getURL)
-        jQuery.get(getURL)
+        $.get(getURL)
           .then(data => {
               console.log(rgbState.currentText)
               rgbState.currentText = data.name.value
