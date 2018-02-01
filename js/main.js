@@ -32,7 +32,7 @@ const rgbState = {
         rgbState.fontColor = 'white'
     },
     getColorURL: () => {
-        const getURL = `http://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
+        const getURL = `//thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
         console.log(getURL)
         $.get(getURL)
           .then(data => {
