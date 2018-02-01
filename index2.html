@@ -23,11 +23,13 @@
             <button class="btn btn-outline-secondary js-clear-button-a my-2 d-inline-block" type="button">Clear palette</button>
 
             <div class="row row-b no-gutters p-1">
-                <div class=" js-color-palette1-b first-palette color-palette col-3 text-center">Color 1</div>
-                <div class=" js-color-palette2-b color-palette col-3 text-center">Color 2</div>
-                <div class=" js-color-palette3-b color-palette col-3 text-center">Color 3</div>
-                <div class=" js-color-palette4-b last-palette color-palette col-3 text-center">Color 4</div>
+                <div class=" js-color-palette1-b first-palette color-palette col-3 text-center">Generated Color</div>
+                <div class=" js-color-palette2-b color-palette col-3 text-center">Random Color</div>
+                <div class=" js-color-palette3-b color-palette col-3 text-center">Random Color</div>
+                <div class=" js-color-palette4-b last-palette color-palette col-3 text-center">Random Color</div>
             </div>
+            <label class="btn my-2 ml-1 d-inline-block"><input type="radio" name="paletteOptionsB" id="randOptTint">Tint</label>
+            <label class="btn my-2 ml-1 d-inline-block"><input type="radio" name="paletteOptionsB" id="randOptShade">Shade</label>
             <button class="btn btn-outline-secondary js-copy-button-b my-2 ml-1 d-inline-block" type="button">Copy palette</button>
             <button class="btn btn-outline-secondary js-clear-button-b my-2 d-inline-block" type="button">Clear palette</button>
 
@@ -37,7 +39,9 @@
                 <div class=" js-color-palette3-c color-palette col-3 text-center">Color 3</div>
                 <div class=" js-color-palette4-c last-palette color-palette col-3 text-center">Color 4</div>
             </div>
-            <input type="text" class="js-custom-input form-control w-50 my-2" placeholder="Display Custom Color palette: As rgb(0-255,0-255,0-255)">
+            <label class="btn my-2 ml-1 d-inline-block"><input type="radio" name="paletteOptionsC" id="custOptTint">Tint</label>
+            <label class="btn my-2 ml-1 d-inline-block"><input type="radio" name="paletteOptionsC" id="custOptShade">Shade</label>
+            <input type="text" class="js-custom-input form-control w-50 my-2 d-inline-block" placeholder="Display Custom Color palette: As rgb(0-255,0-255,0-255)">
             <button class="btn btn-outline-secondary js-copy-button-c my-2 ml-1 d-inline-block" type="button">Copy palette</button>
             <button class="btn btn-outline-secondary js-clear-button-c my-2 d-inline-block" type="button">Clear palette</button>
         </div>

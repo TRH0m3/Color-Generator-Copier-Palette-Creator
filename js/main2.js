@@ -81,22 +81,18 @@ const copyValueEnter = (evt) => {
 const clearColors = (evt) => {
     if (evt.target.matches('.js-clear-button-a')) {
         console.log("clicked!")
-        paletteHolder1a.innerHTML = ''
         paletteHolder1a.style.backgroundColor = 'black'
         paletteHolder1a.innerHTML = 'Color 1'
         paletteHolder1a.style.color = "white";
 
-        paletteHolder2a.innerHTML = ''
         paletteHolder2a.style.backgroundColor = 'black'
         paletteHolder2a.innerHTML = 'Color 2'
         paletteHolder2a.style.color = "white";
 
-        paletteHolder3a.innerHTML = ''
         paletteHolder3a.style.backgroundColor = 'black'
         paletteHolder3a.innerHTML = 'Color 3'
         paletteHolder3a.style.color = "white";
 
-        paletteHolder4a.innerHTML = ''
         paletteHolder4a.style.backgroundColor = 'black'
         paletteHolder4a.innerHTML = 'Color 4'
         paletteHolder4a.style.color = "white";

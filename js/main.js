@@ -1,75 +1,115 @@
-/*
-Click to generate random color.
-It will copy color rgb value and display the color, changing color of text based on color value.
-Using the input field you can specify a color number previously generated
-to copy and then click copy color and it will copy the color rgb value you chose.
+const rgbState = {
+    R: 0,
+    G: 0,
+    B: 0,
+    currentRandomColor: '',
+    currentText: '',
+    customColor: '',
+    smallSquares: '',
+    fontColor: '',
+    textToCopy: '',
+    generateRandomColor: () => {
+        rgbState.R = rand(0,255);
+        rgbState.G = rand(0,255);
+        rgbState.B = rand(0,255);
+        const randomColor = `rgb(${rgbState.R},${rgbState.G},${rgbState.B})`
+        rgbState.currentRandomColor = randomColor
+        rgbState.currentText = randomColor
+        if (rgbState.R < 125 || rgbState.G < 125 || rgbState.B < 125) {
+            rgbState.fontColor = "white";
+        }
+        else {
+            rgbState.fontColor = "black";
+        }
+    },
+    appendSmallSquares: ()=> {
+        rgbState.smallSquares += `<div class="js-small-square small-square mr-1" style="background-color: ${rgbState.currentRandomColor}"></div>`
+    },
+    clearSmallSquares: () => {
+        rgbState.smallSquares = ''
+        rgbState.currentRandomColor = 'black'
+        rgbState.currentText = 'Click to Generate Color'
+        rgbState.fontColor = 'white'
+    },
+    getColorURL: () => {
+        const getURL = `http://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
+        console.log(getURL)
+        $.get(getURL)
+          .then(data => {
+              console.log(rgbState.currentText)
+              rgbState.currentText = data.name.value
+              console.log(rgbState.currentText)
+          })
+    }
+};
 
-USEFUL FOR CREATING A RANDOM COLOR AND COPYING COLOR RGB VALUE.
-*/
+const render = () => {
+    colorHolder.style.backgroundColor = rgbState.currentRandomColor
+    colorHolder.innerHTML = rgbState.currentText
+    colorHolder.style.color = rgbState.fontColor
+    squareHolder.innerHTML = ''
+    squareHolder.innerHTML = rgbState.smallSquares
+    colorRgbText.value = rgbState.textToCopy
+    colorRgbText.select();
+    document.execCommand("Copy");
+    rgbState.textToCopy = ''
+    colorRgbText.value = rgbState.textToCopy
+    customColorInput.value = ''
+}
+
+// const getURL = `http://thecolorapi.com/id?rgb=${R},${G},${B}&format=json`
+// console.log(getURL)
+// $.get(getURL)
+//   .then(data => {
+//       console.log(colorHolder.innerHTML = data.name.value)
+//   })
 
 const rand = ( s, e ) => {
     const random = s + Math.floor( Math.random() * (e-s+1) );
     return random;
 }
 
-let colorHistory = []
+const updateAndRedraw = (callback) => {
+    callback()
+    render()
+}
 
 const genRanColor = evt => {
-  const R = rand(0,255);
-  const G = rand(0,255);
-  const B = rand(0,255);
-  const randomColor = `rgb(${R},${G},${B})`
-
-  colorHolder.style.backgroundColor = randomColor;
-  if (squareHolder.innerHTML == '') {
-  squareHolder.innerHTML += '<p class="my-2">Click Square Below to Copy Color</p>'
-}
-  squareHolder.innerHTML += `<div class="js-small-square small-square mr-1" style="background-color: ${randomColor}"></div>`
-
-  if (R < 125 || G < 125 || B < 125) {
-      colorHolder.style.color = "white";
-  }
-  else {
-      colorHolder.style.color = "black";
-  }
-
-  colorHolder.innerHTML = randomColor;
-  colorHistory.push(randomColor);
+    updateAndRedraw (() => {
+        rgbState.generateRandomColor()
+        rgbState.appendSmallSquares()
+        rgbState.getColorURL()
+    })
 }
 
 const copyRgbContainerColor = (evt) => {
-    colorRgbText.value = evt.target.style.backgroundColor
-    colorRgbText.select();
-    document.execCommand("Copy");
-    }
+    updateAndRedraw(()=> {
+        rgbState.textToCopy = evt.target.style.backgroundColor
+    });
+};
 
 const copySmallSquareColor = (evt) => {
-    const colorRgb = evt.target.style.backgroundColor
-    colorRgbText.value = colorRgb
-    colorRgbText.select()
-    document.execCommand('Copy')
-    colorRgbText.value = ''
+    updateAndRedraw(()=> {
+        rgbState.textToCopy = evt.target.style.backgroundColor
+        rgbState.currentRandomColor = evt.target.style.backgroundColor
+        rgbState.currentText = evt.target.style.backgroundColor
+    });
 }
 
 const clearColors = (evt) => {
-    squareHolder.innerHTML = ''
-    colorHolder.style.backgroundColor = 'black'
-    colorHolder.innerHTML = 'Click to Generate Color'
-    colorHolder.style.color = "white";
-    colorRgbText.value = ''
-    customColorInput.value = ''
+    updateAndRedraw(() => {
+        rgbState.clearSmallSquares()
+    })
 }
 
 const customColorKeyPress = (evt) => {
     if (evt.keyCode === 13) {
-        const customColor = customColorInput.value
-        colorHolder.innerHTML = customColor
-        colorHolder.style.backgroundColor = customColor
-        colorRgbText.value = customColor
-        colorRgbText.select()
-        document.execCommand('Copy')
-        colorRgbText.value = ''
-        customColorInput.value = ''
+        updateAndRedraw(() =>{
+            const customColor = customColorInput.value
+            rgbState.currentRandomColor = customColor
+            rgbState.currentText = customColor
+            rgbState.textToCopy = customColor
+        })
     }
 }
 
