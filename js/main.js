@@ -30,6 +30,7 @@ const rgbState = {
         rgbState.currentRandomColor = 'black'
         rgbState.currentText = 'Click to Generate Color'
         rgbState.fontColor = 'white'
+        rgbState.textToCopy = ''
     },
     getColorURL: (whenDataReturns) => {
         const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
@@ -52,6 +53,7 @@ const rgbState = {
 
 const render = () => {
     colorRgbText.value = rgbState.textToCopy
+    squareHolder.innerHTML = rgbState.smallSquares
     colorRgbText.select();
     document.execCommand("Copy");
     rgbState.textToCopy = ''
@@ -101,6 +103,9 @@ const copySmallSquareColor = (evt) => {
 const clearColors = (evt) => {
     updateAndRedraw(() => {
         rgbState.clearSmallSquares()
+        colorHolder.innerHTML = rgbState.currentText
+        colorHolder.style.backgroundColor = rgbState.currentRandomColor
+        colorHolder.style.color = rgbState.fontColor
     })
 }
 
