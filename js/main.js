@@ -57,7 +57,7 @@ const render = () => {
     customColorInput.value = ''
 }
 
-// const getURL = `http://thecolorapi.com/id?rgb=${R},${G},${B}&format=json`
+// const getURL = `//thecolorapi.com/id?rgb=${R},${G},${B}&format=json`
 // console.log(getURL)
 // $.get(getURL)
 //   .then(data => {
