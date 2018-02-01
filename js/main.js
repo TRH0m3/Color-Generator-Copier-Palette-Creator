@@ -31,24 +31,26 @@ const rgbState = {
         rgbState.currentText = 'Click to Generate Color'
         rgbState.fontColor = 'white'
     },
-    getColorURL: () => {
-        const getURL = `http://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
+    getColorURL: (whenDataReturns) => {
+        const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
+        $.get(getURL)
+            .then(data => {
+              rgbState.currentText = data.name.value
+              whenDataReturns();
+          })
+    },
+    getColorURLSmallSquare: (whenDataReturns) => {
+        const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?rgb=${rgbState.currentRandomColor}&format=json`
         console.log(getURL)
         $.get(getURL)
-          .then(data => {
-              console.log(rgbState.currentText)
+            .then(data => {
               rgbState.currentText = data.name.value
-              console.log(rgbState.currentText)
+              whenDataReturns();
           })
     }
 };
 
 const render = () => {
-    colorHolder.style.backgroundColor = rgbState.currentRandomColor
-    colorHolder.innerHTML = rgbState.currentText
-    colorHolder.style.color = rgbState.fontColor
-    squareHolder.innerHTML = ''
-    squareHolder.innerHTML = rgbState.smallSquares
     colorRgbText.value = rgbState.textToCopy
     colorRgbText.select();
     document.execCommand("Copy");
@@ -56,13 +58,6 @@ const render = () => {
     colorRgbText.value = rgbState.textToCopy
     customColorInput.value = ''
 }
-
-// const getURL = `//thecolorapi.com/id?rgb=${R},${G},${B}&format=json`
-// console.log(getURL)
-// $.get(getURL)
-//   .then(data => {
-//       console.log(colorHolder.innerHTML = data.name.value)
-//   })
 
 const rand = ( s, e ) => {
     const random = s + Math.floor( Math.random() * (e-s+1) );
@@ -78,21 +73,28 @@ const genRanColor = evt => {
     updateAndRedraw (() => {
         rgbState.generateRandomColor()
         rgbState.appendSmallSquares()
-        rgbState.getColorURL()
+        rgbState.textToCopy = rgbState.currentRandomColor
+        rgbState.getColorURL(()=>{
+            colorHolder.innerHTML = rgbState.currentText
+            colorHolder.style.backgroundColor = rgbState.currentRandomColor
+            colorHolder.style.color = rgbState.fontColor
+            squareHolder.innerHTML = ''
+            squareHolder.innerHTML = rgbState.smallSquares
+        })
     })
 }
-
-const copyRgbContainerColor = (evt) => {
-    updateAndRedraw(()=> {
-        rgbState.textToCopy = evt.target.style.backgroundColor
-    });
-};
 
 const copySmallSquareColor = (evt) => {
     updateAndRedraw(()=> {
         rgbState.textToCopy = evt.target.style.backgroundColor
         rgbState.currentRandomColor = evt.target.style.backgroundColor
-        rgbState.currentText = evt.target.style.backgroundColor
+        rgbState.getColorURLSmallSquare(()=>{
+            colorHolder.innerHTML = rgbState.currentText
+            colorHolder.style.backgroundColor = rgbState.currentRandomColor
+            colorHolder.style.color = rgbState.fontColor
+            squareHolder.innerHTML = ''
+            squareHolder.innerHTML = rgbState.smallSquares
+        })
     });
 }
 
@@ -107,8 +109,16 @@ const customColorKeyPress = (evt) => {
         updateAndRedraw(() =>{
             const customColor = customColorInput.value
             rgbState.currentRandomColor = customColor
+            rgbState.appendSmallSquares()
             rgbState.currentText = customColor
             rgbState.textToCopy = customColor
+            rgbState.getColorURLSmallSquare(()=>{
+                colorHolder.innerHTML = rgbState.currentText
+                colorHolder.style.backgroundColor = rgbState.currentRandomColor
+                colorHolder.style.color = rgbState.fontColor
+                squareHolder.innerHTML = ''
+                squareHolder.innerHTML = rgbState.smallSquares
+            })
         })
     }
 }
@@ -122,7 +132,6 @@ const clearButton = document.querySelector('.js-clear-button')
 const customColorInput = document.querySelector('.js-custom-color-input')
 
 colorHolder.addEventListener('click', genRanColor);
-colorHolder.addEventListener('click', copyRgbContainerColor);
 clearButton.addEventListener('click', clearColors)
 squareHolder.addEventListener('click', copySmallSquareColor)
 customColorInput.addEventListener('keypress', customColorKeyPress)
