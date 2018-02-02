@@ -122,22 +122,31 @@ const genRanColor = evt => {
         })
     })
 }
-
+const getColorURL = () => {
+    rgbState.getColorURLSmallSquare(()=>{
+        colorHolder.innerHTML = rgbState.currentText
+        colorHolder.style.backgroundColor = rgbState.currentRandomColor
+        colorHolder.style.color = rgbState.fontColor
+        squareHolder.innerHTML = ''
+        squareHolder.innerHTML = rgbState.smallSquares
+        enable()
+    })
+}
 const copySmallSquareColor = evt => {
     updateAndRedraw(()=> {
         rgbState.textToCopy = evt.target.style.backgroundColor
         rgbState.currentRandomColor = evt.target.style.backgroundColor
         rgbState.currentRandomColor = rgbState.currentRandomColor.replace(/\s/g, "")
         disable()
-        rgbState.getColorURLSmallSquare(()=>{
-            colorHolder.innerHTML = rgbState.currentText
-            colorHolder.style.backgroundColor = rgbState.currentRandomColor
-            colorHolder.style.color = rgbState.fontColor
-            squareHolder.innerHTML = ''
-            squareHolder.innerHTML = rgbState.smallSquares
-            enable()
-        })
-    });
+        getColorURL()
+        // rgbState.getColorURLSmallSquare(()=>{
+        //     colorHolder.innerHTML = rgbState.currentText
+        //     colorHolder.style.backgroundColor = rgbState.currentRandomColor
+        //     colorHolder.style.color = rgbState.fontColor
+        //     squareHolder.innerHTML = ''
+        //     squareHolder.innerHTML = rgbState.smallSquares
+        //     enable()
+    })
 }
 
 const customColorKeyPress = evt => {
@@ -149,14 +158,14 @@ const customColorKeyPress = evt => {
             rgbState.currentText = customColor
             rgbState.textToCopy = customColor
             disable()
-            rgbState.getColorURLSmallSquare(()=>{
-                colorHolder.innerHTML = rgbState.currentText
-                colorHolder.style.backgroundColor = rgbState.currentRandomColor
-                colorHolder.style.color = rgbState.fontColor
-                squareHolder.innerHTML = ''
-                squareHolder.innerHTML = rgbState.smallSquares
-                enable()
-            })
+            getColorURL()
+            // rgbState.getColorURLSmallSquare(()=>{
+            //     colorHolder.innerHTML = rgbState.currentText
+            //     colorHolder.style.backgroundColor = rgbState.currentRandomColor
+            //     colorHolder.style.color = rgbState.fontColor
+            //     squareHolder.innerHTML = ''
+            //     squareHolder.innerHTML = rgbState.smallSquares
+            //     enable()
         })
     }
 }
@@ -204,15 +213,15 @@ const onPaletteClick = evt => {
         rgbState.currentRandomColor = rgbState.currentRandomColor.replace(/\s/g, "")
         rgbState.appendSmallSquares()
         disable()
-        rgbState.getColorURLSmallSquare(()=>{
-            colorHolder.innerHTML = rgbState.currentText
-            colorHolder.style.backgroundColor = rgbState.currentRandomColor
-            colorHolder.style.color = rgbState.fontColor
-            squareHolder.innerHTML = ''
-            squareHolder.innerHTML = rgbState.smallSquares
-            enable()
-        })
-    });
+        getColorURL()
+        // rgbState.getColorURLSmallSquare(()=>{
+        //     colorHolder.innerHTML = rgbState.currentText
+        //     colorHolder.style.backgroundColor = rgbState.currentRandomColor
+        //     colorHolder.style.color = rgbState.fontColor
+        //     squareHolder.innerHTML = ''
+        //     squareHolder.innerHTML = rgbState.smallSquares
+        //     enable()
+    })
 }
 
 const onCreatePaletteButtonClick = evt => {
