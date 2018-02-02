@@ -188,7 +188,26 @@ const paletteClear = () => {
     rgbState.paletteColorText = [];
     MonochromeInput.checked = true;
 }
-const onpaletteClick = evt => {
+
+const onPaletteClick = evt => {
+    updateAndRedraw(()=> {
+        rgbState.textToCopy = evt.target.style.backgroundColor
+        rgbState.currentRandomColor = evt.target.style.backgroundColor
+        rgbState.currentRandomColor = rgbState.currentRandomColor.replace(/\s/g, "")
+        rgbState.appendSmallSquares()
+        disable()
+        rgbState.getColorURLSmallSquare(()=>{
+            colorHolder.innerHTML = rgbState.currentText
+            colorHolder.style.backgroundColor = rgbState.currentRandomColor
+            colorHolder.style.color = rgbState.fontColor
+            squareHolder.innerHTML = ''
+            squareHolder.innerHTML = rgbState.smallSquares
+            enable()
+        })
+    });
+}
+
+const onPaletteButtonClick = evt => {
     if (MonochromeInput.checked == true) {
         rgbState.paletteMode = "monochrome"
         disable();
@@ -267,4 +286,5 @@ colorHolder.addEventListener('click', genRanColor);
 clearButton.addEventListener('click', clearColors)
 squareHolder.addEventListener('click', copySmallSquareColor)
 customColorInput.addEventListener('keypress', customColorKeyPress)
-paletteButton.addEventListener('click', onpaletteClick)
+paletteButton.addEventListener('click', onPaletteButtonClick)
+paletteHolder.addEventListener('click', onPaletteClick)
