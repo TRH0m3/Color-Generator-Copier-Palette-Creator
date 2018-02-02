@@ -10,6 +10,7 @@ const rgbState = {
     textToCopy: '',
     paletteMode: '',
     paletteToShow: [],
+    paletteToCopy: [],
     paletteColorText: [],
     generateRandomColor: () => {
         rgbState.R = rand(0,255);
@@ -53,11 +54,14 @@ const rgbState = {
     },
     getColorURLPalette: (whenDataReturns) => {
         const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=json&mode=${rgbState.paletteMode}&count=6`
-        console.log(getURL)
         $.get(getURL)
             .then(data => {
-                for(let i= 0; i< data.colors.length; i++) {
+                if (rgbState.paletteToCopy.length > 5) {
+                    rgbState.paletteToCopy = []
+                }
+                for (let i= 0; i< data.colors.length; i++) {
                     rgbState.paletteToShow.push(data.colors[i].rgb.value)
+                    rgbState.paletteToCopy.push(` ${data.colors[i].rgb.value}`)
                     rgbState.paletteColorText.push(data.colors[i].name.value)
             }
                 whenDataReturns();
@@ -87,14 +91,16 @@ const rand = ( s, e ) => {
 
 const disable = () => {
     clearButton.setAttribute('disabled', 'disabled')
-    paletteButton.setAttribute('disabled', 'disabled')
+    createPaletteButton.setAttribute('disabled', 'disabled')
+    copyPaletteButton.setAttribute('disabled', 'disabled')
     customColorInput.setAttribute('disabled', 'disabled')
     colorHolder.innerHTML = '<div class="loader">Loading...</div>'
 }
 
 const enable = () => {
     clearButton.removeAttribute('disabled')
-    paletteButton.removeAttribute('disabled')
+    createPaletteButton.removeAttribute('disabled')
+    copyPaletteButton.removeAttribute('disabled')
     customColorInput.removeAttribute('disabled')
     colorHolder.innerHTML = rgbState.currentText;
 }
@@ -167,7 +173,7 @@ const paletteUpdate = () => {
     paletteHolder4.innerHTML = rgbState.paletteColorText[3]
     paletteHolder5.innerHTML = rgbState.paletteColorText[4]
     paletteHolder6.innerHTML = rgbState.paletteColorText[5]
-    rgbState.paletteToShow = []
+    rgbState.paletteToShow = [];
     rgbState.paletteColorText = []
 }
 
@@ -207,7 +213,7 @@ const onPaletteClick = evt => {
     });
 }
 
-const onPaletteButtonClick = evt => {
+const onCreatePaletteButtonClick = evt => {
     if (MonochromeInput.checked == true) {
         rgbState.paletteMode = "monochrome"
         disable();
@@ -250,6 +256,11 @@ const onPaletteButtonClick = evt => {
     }
 }
 
+const onCopyPaletteButtonClick = evt => {
+    updateAndRedraw(() => {
+        rgbState.textToCopy = rgbState.paletteToCopy
+    })
+}
 const clearColors = evt => {
     updateAndRedraw(() => {
         rgbState.clearSmallSquares()
@@ -272,7 +283,8 @@ const AnalogicInput = document.querySelector('#Analogic')
 const ComplementInput = document.querySelector('#Complement')
 const TriadInput = document.querySelector('#Triad')
 const QuadInput = document.querySelector('#Quad')
-const paletteButton = document.querySelector('.js-palette-button')
+const createPaletteButton = document.querySelector('.js-create-palette-button')
+const copyPaletteButton = document.querySelector('.js-copy-palette-button')
 const paletteHolder = document.querySelector('.js-palette-holder')
 const paletteHolder1 = document.querySelector('.js-color-palette1');
 const paletteHolder2 = document.querySelector('.js-color-palette2');
@@ -286,5 +298,6 @@ colorHolder.addEventListener('click', genRanColor);
 clearButton.addEventListener('click', clearColors)
 squareHolder.addEventListener('click', copySmallSquareColor)
 customColorInput.addEventListener('keypress', customColorKeyPress)
-paletteButton.addEventListener('click', onPaletteButtonClick)
+createPaletteButton.addEventListener('click', onCreatePaletteButtonClick)
 paletteHolder.addEventListener('click', onPaletteClick)
+copyPaletteButton.addEventListener('click', onCopyPaletteButtonClick)
