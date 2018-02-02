@@ -8,6 +8,8 @@ const rgbState = {
     smallSquares: '',
     fontColor: '',
     textToCopy: '',
+    paletteMode: '',
+    paletteToShow: '',
     generateRandomColor: () => {
         rgbState.R = rand(0,255);
         rgbState.G = rand(0,255);
@@ -42,10 +44,19 @@ const rgbState = {
     },
     getColorURLSmallSquare: (whenDataReturns) => {
         const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?rgb=${rgbState.currentRandomColor}&format=json`
+        $.get(getURL)
+            .then(data => {
+                rgbState.currentText = data.name.value
+              whenDataReturns();
+          })
+    },
+    getColorURLPalette: (whenDataReturns) => {
+        const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=svg&mode=${rgbState.paletteMode}&count=6`
         console.log(getURL)
         $.get(getURL)
             .then(data => {
-              rgbState.currentText = data.name.value
+                console.log(`http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=svg&mode=${rgbState.paletteMode}&count=6`)
+                rgbState.paletteToShow = `http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=svg&mode=${rgbState.paletteMode}&count=6`;
               whenDataReturns();
           })
     }
@@ -66,7 +77,7 @@ const rand = ( s, e ) => {
     return random;
 }
 
-const updateAndRedraw = (callback) => {
+const updateAndRedraw = callback => {
     callback()
     render()
 }
@@ -86,10 +97,11 @@ const genRanColor = evt => {
     })
 }
 
-const copySmallSquareColor = (evt) => {
+const copySmallSquareColor = evt => {
     updateAndRedraw(()=> {
         rgbState.textToCopy = evt.target.style.backgroundColor
         rgbState.currentRandomColor = evt.target.style.backgroundColor
+        rgbState.currentRandomColor = rgbState.currentRandomColor.replace(/\s/g, "")
         rgbState.getColorURLSmallSquare(()=>{
             colorHolder.innerHTML = rgbState.currentText
             colorHolder.style.backgroundColor = rgbState.currentRandomColor
@@ -100,7 +112,7 @@ const copySmallSquareColor = (evt) => {
     });
 }
 
-const clearColors = (evt) => {
+const clearColors = evt => {
     updateAndRedraw(() => {
         rgbState.clearSmallSquares()
         colorHolder.innerHTML = rgbState.currentText
@@ -109,7 +121,7 @@ const clearColors = (evt) => {
     })
 }
 
-const customColorKeyPress = (evt) => {
+const customColorKeyPress = evt => {
     if (evt.keyCode === 13) {
         updateAndRedraw(() =>{
             const customColor = customColorInput.value
@@ -128,6 +140,39 @@ const customColorKeyPress = (evt) => {
     }
 }
 
+const onpaletteClick = evt => {
+    if (MonochromeInput.checked == true) {
+        rgbState.paletteMode = "monochrome"
+        rgbState.getColorURLPalette (() => {
+            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+        })
+    }
+    else if (AnalogicInput.checked == true) {
+        rgbState.paletteMode = "analogic"
+        rgbState.getColorURLPalette (() => {
+            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+        })
+    }
+    else if (ComplementInput.checked == true) {
+        rgbState.paletteMode = "complement"
+        rgbState.getColorURLPalette (() => {
+            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+        })
+    }
+    else if (TriadInput.checked == true) {
+        rgbState.paletteMode = "triad"
+        rgbState.getColorURLPalette (() => {
+            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+        })
+    }
+    else if (QuadInput.checked == true) {
+        rgbState.paletteMode = "quad"
+        rgbState.getColorURLPalette (() => {
+            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+        })
+    }
+}
+
 const colorHolder = document.querySelector('.js-color-holder');
 const squareHolder = document.querySelector('.js-square-holder');
 const colorRgbText = document.querySelector('.js-copy-color');
@@ -135,8 +180,17 @@ const copyButton = document.querySelector('.js-copy-button')
 const copyNumberValue = document.querySelector('.js-color-number-input')
 const clearButton = document.querySelector('.js-clear-button')
 const customColorInput = document.querySelector('.js-custom-color-input')
+const MonochromeInput = document.querySelector('#Monochrome')
+const AnalogicInput = document.querySelector('#Analogic')
+const ComplementInput = document.querySelector('#Complement')
+const TriadInput = document.querySelector('#Triad')
+const QuadInput = document.querySelector('#Quad')
+const paletteButton = document.querySelector('.js-palette-button')
+const paletteHolder = document.querySelector('.js-palette-holder')
+
 
 colorHolder.addEventListener('click', genRanColor);
 clearButton.addEventListener('click', clearColors)
 squareHolder.addEventListener('click', copySmallSquareColor)
 customColorInput.addEventListener('keypress', customColorKeyPress)
+paletteButton.addEventListener('click', onpaletteClick)
