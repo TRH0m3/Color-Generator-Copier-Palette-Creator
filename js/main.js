@@ -193,6 +193,7 @@ const paletteClear = () => {
     paletteHolder6.innerHTML = '';
     rgbState.paletteToShow = [];
     rgbState.paletteColorText = [];
+    rgbState.paletteToCopy = []
     MonochromeInput.checked = true;
 }
 
