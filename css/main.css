@@ -2,8 +2,15 @@ nav {
     font-family: 'Work Sans', sans-serif;
     display: inline-block;
 }
-.input-group {
-    width: 375px;
+.btn-outline-primary {
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+.btn-outline-primary:hover {
+    background-color: black;
+    border-color: black;
+    color: white;
 }
 .color-holder {
     height: 20vw;
