@@ -61,7 +61,7 @@ nav {
   color: #ffffff;
   text-indent: -9999em;
   margin: 8% 50%;
-  position: fixed;
+  position: absolute;
   font-size: 1vw;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
