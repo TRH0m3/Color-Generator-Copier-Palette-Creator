@@ -9,7 +9,8 @@ const rgbState = {
     fontColor: '',
     textToCopy: '',
     paletteMode: '',
-    paletteToShow: '',
+    paletteToShow: [],
+    paletteColorText: [],
     generateRandomColor: () => {
         rgbState.R = rand(0,255);
         rgbState.G = rand(0,255);
@@ -51,13 +52,15 @@ const rgbState = {
           })
     },
     getColorURLPalette: (whenDataReturns) => {
-        const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=svg&mode=${rgbState.paletteMode}&count=6`
+        const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=json&mode=${rgbState.paletteMode}&count=6`
         console.log(getURL)
         $.get(getURL)
             .then(data => {
-                console.log(`http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=svg&mode=${rgbState.paletteMode}&count=6`)
-                rgbState.paletteToShow = `http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=svg&mode=${rgbState.paletteMode}&count=6`;
-              whenDataReturns();
+                for(let i= 0; i< data.colors.length; i++) {
+                    rgbState.paletteToShow.push(data.colors[i].rgb.value)
+                    rgbState.paletteColorText.push(data.colors[i].name.value)
+            }
+                whenDataReturns();
           })
     }
 };
@@ -72,27 +75,43 @@ const render = () => {
     customColorInput.value = ''
 }
 
-const rand = ( s, e ) => {
-    const random = s + Math.floor( Math.random() * (e-s+1) );
-    return random;
-}
-
 const updateAndRedraw = callback => {
     callback()
     render()
 }
 
+const rand = ( s, e ) => {
+    const random = s + Math.floor( Math.random() * (e-s+1) );
+    return random;
+}
+
+const disable = () => {
+    clearButton.setAttribute('disabled', 'disabled')
+    paletteButton.setAttribute('disabled', 'disabled')
+    customColorInput.setAttribute('disabled', 'disabled')
+    colorHolder.innerHTML = '<div class="loader">Loading...</div>'
+}
+
+const enable = () => {
+    clearButton.removeAttribute('disabled')
+    paletteButton.removeAttribute('disabled')
+    customColorInput.removeAttribute('disabled')
+    colorHolder.innerHTML = rgbState.currentText;
+}
+
 const genRanColor = evt => {
     updateAndRedraw (() => {
         rgbState.generateRandomColor()
-        rgbState.appendSmallSquares()
         rgbState.textToCopy = rgbState.currentRandomColor
+        disable()
         rgbState.getColorURL(()=>{
+            rgbState.appendSmallSquares()
             colorHolder.innerHTML = rgbState.currentText
             colorHolder.style.backgroundColor = rgbState.currentRandomColor
             colorHolder.style.color = rgbState.fontColor
             squareHolder.innerHTML = ''
             squareHolder.innerHTML = rgbState.smallSquares
+            enable()
         })
     })
 }
@@ -102,23 +121,16 @@ const copySmallSquareColor = evt => {
         rgbState.textToCopy = evt.target.style.backgroundColor
         rgbState.currentRandomColor = evt.target.style.backgroundColor
         rgbState.currentRandomColor = rgbState.currentRandomColor.replace(/\s/g, "")
+        disable()
         rgbState.getColorURLSmallSquare(()=>{
             colorHolder.innerHTML = rgbState.currentText
             colorHolder.style.backgroundColor = rgbState.currentRandomColor
             colorHolder.style.color = rgbState.fontColor
             squareHolder.innerHTML = ''
             squareHolder.innerHTML = rgbState.smallSquares
+            enable()
         })
     });
-}
-
-const clearColors = evt => {
-    updateAndRedraw(() => {
-        rgbState.clearSmallSquares()
-        colorHolder.innerHTML = rgbState.currentText
-        colorHolder.style.backgroundColor = rgbState.currentRandomColor
-        colorHolder.style.color = rgbState.fontColor
-    })
 }
 
 const customColorKeyPress = evt => {
@@ -129,54 +141,110 @@ const customColorKeyPress = evt => {
             rgbState.appendSmallSquares()
             rgbState.currentText = customColor
             rgbState.textToCopy = customColor
+            disable()
             rgbState.getColorURLSmallSquare(()=>{
                 colorHolder.innerHTML = rgbState.currentText
                 colorHolder.style.backgroundColor = rgbState.currentRandomColor
                 colorHolder.style.color = rgbState.fontColor
                 squareHolder.innerHTML = ''
                 squareHolder.innerHTML = rgbState.smallSquares
+                enable()
             })
         })
     }
 }
 
+const paletteUpdate = () => {
+    paletteHolder1.style.backgroundColor = rgbState.paletteToShow[0]
+    paletteHolder2.style.backgroundColor = rgbState.paletteToShow[1]
+    paletteHolder3.style.backgroundColor = rgbState.paletteToShow[2]
+    paletteHolder4.style.backgroundColor = rgbState.paletteToShow[3]
+    paletteHolder5.style.backgroundColor = rgbState.paletteToShow[4]
+    paletteHolder6.style.backgroundColor = rgbState.paletteToShow[5]
+    paletteHolder1.innerHTML = rgbState.paletteColorText[0]
+    paletteHolder2.innerHTML = rgbState.paletteColorText[1]
+    paletteHolder3.innerHTML = rgbState.paletteColorText[2]
+    paletteHolder4.innerHTML = rgbState.paletteColorText[3]
+    paletteHolder5.innerHTML = rgbState.paletteColorText[4]
+    paletteHolder6.innerHTML = rgbState.paletteColorText[5]
+    rgbState.paletteToShow = []
+    rgbState.paletteColorText = []
+}
+
+const paletteClear = () => {
+    paletteHolder1.style.backgroundColor = null;
+    paletteHolder2.style.backgroundColor = null;
+    paletteHolder3.style.backgroundColor = null;
+    paletteHolder4.style.backgroundColor = null;
+    paletteHolder5.style.backgroundColor = null;
+    paletteHolder6.style.backgroundColor = null;
+    paletteHolder1.innerHTML = '';
+    paletteHolder2.innerHTML = '';
+    paletteHolder3.innerHTML = '';
+    paletteHolder4.innerHTML = '';
+    paletteHolder5.innerHTML = '';
+    paletteHolder6.innerHTML = '';
+    rgbState.paletteToShow = [];
+    rgbState.paletteColorText = [];
+    MonochromeInput.checked = true;
+}
 const onpaletteClick = evt => {
     if (MonochromeInput.checked == true) {
         rgbState.paletteMode = "monochrome"
+        disable();
         rgbState.getColorURLPalette (() => {
-            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+            paletteUpdate()
+            enable();
         })
     }
     else if (AnalogicInput.checked == true) {
         rgbState.paletteMode = "analogic"
+        disable();
         rgbState.getColorURLPalette (() => {
-            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+            paletteUpdate()
+            enable();
         })
     }
     else if (ComplementInput.checked == true) {
         rgbState.paletteMode = "complement"
+        disable();
         rgbState.getColorURLPalette (() => {
-            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+            paletteUpdate()
+            enable();
         })
     }
     else if (TriadInput.checked == true) {
         rgbState.paletteMode = "triad"
+        disable();
         rgbState.getColorURLPalette (() => {
-            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+            paletteUpdate()
+            enable();
         })
     }
     else if (QuadInput.checked == true) {
         rgbState.paletteMode = "quad"
+        disable();
         rgbState.getColorURLPalette (() => {
-            paletteHolder.innerHTML = `<img src = ${rgbState.paletteToShow}>`
+            paletteUpdate()
+            enable();
         })
     }
 }
 
+const clearColors = evt => {
+    updateAndRedraw(() => {
+        rgbState.clearSmallSquares()
+        colorHolder.innerHTML = rgbState.currentText
+        colorHolder.style.backgroundColor = rgbState.currentRandomColor
+        colorHolder.style.color = rgbState.fontColor
+        paletteClear()
+    })
+}
+
+
 const colorHolder = document.querySelector('.js-color-holder');
 const squareHolder = document.querySelector('.js-square-holder');
 const colorRgbText = document.querySelector('.js-copy-color');
-const copyButton = document.querySelector('.js-copy-button')
 const copyNumberValue = document.querySelector('.js-color-number-input')
 const clearButton = document.querySelector('.js-clear-button')
 const customColorInput = document.querySelector('.js-custom-color-input')
@@ -187,6 +255,12 @@ const TriadInput = document.querySelector('#Triad')
 const QuadInput = document.querySelector('#Quad')
 const paletteButton = document.querySelector('.js-palette-button')
 const paletteHolder = document.querySelector('.js-palette-holder')
+const paletteHolder1 = document.querySelector('.js-color-palette1');
+const paletteHolder2 = document.querySelector('.js-color-palette2');
+const paletteHolder3 = document.querySelector('.js-color-palette3');
+const paletteHolder4 = document.querySelector('.js-color-palette4');
+const paletteHolder5 = document.querySelector('.js-color-palette5');
+const paletteHolder6 = document.querySelector('.js-color-palette6');
 
 
 colorHolder.addEventListener('click', genRanColor);
