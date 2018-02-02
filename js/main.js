@@ -117,6 +117,7 @@ const genRanColor = evt => {
             colorHolder.style.color = rgbState.fontColor
             squareHolder.innerHTML = ''
             squareHolder.innerHTML = rgbState.smallSquares
+            paletteClear()
             enable()
         })
     })
