@@ -37,7 +37,7 @@ const rgbState = {
         rgbState.textToCopy = ''
     },
     getColorURL: (whenDataReturns) => {
-        const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
+        const getURL = `https://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
         $.get(getURL)
             .then(data => {
               rgbState.currentText = data.name.value
@@ -45,7 +45,7 @@ const rgbState = {
           })
     },
     getColorURLSmallSquare: (whenDataReturns) => {
-        const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?rgb=${rgbState.currentRandomColor}&format=json`
+        const getURL = `https://thecolorapi.com/id?rgb=${rgbState.currentRandomColor}&format=json`
         $.get(getURL)
             .then(data => {
                 rgbState.currentText = data.name.value
@@ -53,7 +53,7 @@ const rgbState = {
           })
     },
     getColorURLPalette: (whenDataReturns) => {
-        const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=json&mode=${rgbState.paletteMode}&count=6`
+        const getURL = `https://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=json&mode=${rgbState.paletteMode}&count=6`
         $.get(getURL)
             .then(data => {
                 if (rgbState.paletteToCopy.length > 5) {
