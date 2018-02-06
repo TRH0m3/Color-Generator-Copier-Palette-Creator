@@ -69,10 +69,6 @@ nav {
 .about-text, .how-to {
     font-size: 1.5vw;
 }
-/* .how-to-column {
-    position: relative;
-    padding-top: 2.7%; */
-}
 /* Loader Styling */
 .loader,
 .loader:before,
