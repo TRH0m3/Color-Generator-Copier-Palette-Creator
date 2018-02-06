@@ -143,13 +143,6 @@ const copySmallSquareColor = evt => {
         rgbState.currentRandomColor = rgbState.currentRandomColor.replace(/\s/g, "")
         disable()
         getColorURL()
-        // rgbState.getColorURLSmallSquare(()=>{
-        //     colorHolder.innerHTML = rgbState.currentText
-        //     colorHolder.style.backgroundColor = rgbState.currentRandomColor
-        //     colorHolder.style.color = rgbState.fontColor
-        //     squareHolder.innerHTML = ''
-        //     squareHolder.innerHTML = rgbState.smallSquares
-        //     enable()
     })
 }
 
@@ -163,48 +156,24 @@ const customColorKeyPress = evt => {
             rgbState.textToCopy = customColor
             disable()
             getColorURL()
-            // rgbState.getColorURLSmallSquare(()=>{
-            //     colorHolder.innerHTML = rgbState.currentText
-            //     colorHolder.style.backgroundColor = rgbState.currentRandomColor
-            //     colorHolder.style.color = rgbState.fontColor
-            //     squareHolder.innerHTML = ''
-            //     squareHolder.innerHTML = rgbState.smallSquares
-            //     enable()
         })
     }
 }
-// ADD FOR LOOPS!!!
 
 const paletteUpdate = () => {
-    paletteHolder1.style.backgroundColor = rgbState.paletteToShow[0]
-    paletteHolder2.style.backgroundColor = rgbState.paletteToShow[1]
-    paletteHolder3.style.backgroundColor = rgbState.paletteToShow[2]
-    paletteHolder4.style.backgroundColor = rgbState.paletteToShow[3]
-    paletteHolder5.style.backgroundColor = rgbState.paletteToShow[4]
-    paletteHolder6.style.backgroundColor = rgbState.paletteToShow[5]
-    paletteHolder1.innerHTML = rgbState.paletteColorText[0]
-    paletteHolder2.innerHTML = rgbState.paletteColorText[1]
-    paletteHolder3.innerHTML = rgbState.paletteColorText[2]
-    paletteHolder4.innerHTML = rgbState.paletteColorText[3]
-    paletteHolder5.innerHTML = rgbState.paletteColorText[4]
-    paletteHolder6.innerHTML = rgbState.paletteColorText[5]
+    for (let i = 0; i<paletteHolderAll.length; i++) {
+        paletteHolderAll[i].style.backgroundColor = rgbState.paletteToShow[i]
+        paletteHolderAll[i].innerHTML = rgbState.paletteColorText[i]
+    }
     rgbState.paletteToShow = [];
     rgbState.paletteColorText = []
 }
 
 const paletteClear = () => {
-    paletteHolder1.style.backgroundColor = null;
-    paletteHolder2.style.backgroundColor = null;
-    paletteHolder3.style.backgroundColor = null;
-    paletteHolder4.style.backgroundColor = null;
-    paletteHolder5.style.backgroundColor = null;
-    paletteHolder6.style.backgroundColor = null;
-    paletteHolder1.innerHTML = '';
-    paletteHolder2.innerHTML = '';
-    paletteHolder3.innerHTML = '';
-    paletteHolder4.innerHTML = '';
-    paletteHolder5.innerHTML = '';
-    paletteHolder6.innerHTML = '';
+    for (let i = 0; i<paletteHolderAll.length; i++) {
+        paletteHolderAll[i].style.backgroundColor = null
+        paletteHolderAll[i].innerHTML = ''
+    }
     rgbState.paletteToShow = [];
     rgbState.paletteColorText = [];
     rgbState.paletteToCopy = []
@@ -219,13 +188,6 @@ const onPaletteClick = evt => {
         rgbState.appendSmallSquares()
         disable()
         getColorURL()
-        // rgbState.getColorURLSmallSquare(()=>{
-        //     colorHolder.innerHTML = rgbState.currentText
-        //     colorHolder.style.backgroundColor = rgbState.currentRandomColor
-        //     colorHolder.style.color = rgbState.fontColor
-        //     squareHolder.innerHTML = ''
-        //     squareHolder.innerHTML = rgbState.smallSquares
-        //     enable()
     })
 }
 
@@ -302,6 +264,7 @@ const QuadInput = document.querySelector('#Quad')
 const createPaletteButton = document.querySelector('.js-create-palette-button')
 const copyPaletteButton = document.querySelector('.js-copy-palette-button')
 const paletteHolder = document.querySelector('.js-palette-holder')
+const paletteHolderAll = document.querySelectorAll('.js-color-palette')
 const paletteHolder1 = document.querySelector('.js-color-palette1');
 const paletteHolder2 = document.querySelector('.js-color-palette2');
 const paletteHolder3 = document.querySelector('.js-color-palette3');
