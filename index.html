@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
       <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <div class="row">
           <nav class="navbar navbar-dark col pl-4" style="background-color: black"><a class="navbar-brand" href="index.html">Color Generator/Copier & Palette Creator</a></nav>
@@ -35,9 +35,45 @@
         <div class="js-square-holder square-holder my-2 mx-auto"></div>
         <textarea class="js-copy-color copy-color"></textarea>
     </div>
-        <script  src ="js/main.js"></script>
+    <footer class="page-footer">
+        <div class="container-fluid">
+            <div class="row justify-content-between">
+                <div class="col-10 pt-2">
+                    <h5 class="title about">About This Webpage:</h5>
+                    <p class="about-text">This website was designed and created by Patrick Reese for a final project for Javascript Development at General Assembly.</p>
+                </div>
+                <div class="col-2 text-right bg-light how-to-column">
+                    <button class="btn btn-outline-primary how-to p-2" data-toggle="modal" data-target="#myModal">How To Use</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">How To Use</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4>To generate a random color:</h4>
+            <p>Click on the box labeled "Click to generate Random Color".</p>
+            <h4>To generate a chosen color:</h4>
+            <p>Type into the input a rgb(x,y,z) value and hit Enter.</p>
+            <h4>To display an already generated color:</h4>
+            <p>Click on the small color box, it will push to the big box up top.</p>
+            <h4>To create a palette from a color:</h4>
+            <p>Ensure a color is displayed up top, then click the palette option and "Create Palette".</p>
+            <h3 class="text-danger"><b>Disclaimer:</b><br>Anytime a color is displayed in the big box, its rgb value is copied</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script  src ="js/main.js"></script>
       <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     </body>
   </html>

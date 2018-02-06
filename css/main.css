@@ -2,6 +2,10 @@ nav {
     font-family: 'Work Sans', sans-serif;
     display: inline-block;
 }
+.navbar-brand, .navbar-brand:hover {
+    color: white;
+    font-size: 2vw;
+}
  .btn-outline-primary {
     background-color: white;
     border-color: black;
@@ -53,7 +57,22 @@ nav {
 .last-palette {
     border-radius: 0 5px 5px 0;
 }
-
+.page-footer {
+    background-color: black;
+    color: white;
+    position:absolute;
+    bottom:0;
+}
+.about {
+    font-size:2vw;
+}
+.about-text, .how-to {
+    font-size: 1.5vw;
+}
+.how-to-column {
+    position: relative;
+    padding-top: 2.7%;
+}
 /* Loader Styling */
 .loader,
 .loader:before,
