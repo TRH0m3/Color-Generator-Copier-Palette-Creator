@@ -36,36 +36,40 @@ const rgbState = {
         rgbState.fontColor = 'white'
         rgbState.textToCopy = ''
     },
+    urlPromise: (url) => {
+        return new Promise((resolve, reject) => {
+                $.get(url, data => {
+                    resolve(data)
+                });
+        });
+    },
     getColorURL: (whenDataReturns) => {
         const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`
-        $.get(getURL)
-            .then(data => {
-              rgbState.currentText = data.name.value
-              whenDataReturns();
-          })
+        rgbState.urlPromise(getURL).then(data => {
+             rgbState.currentText = data.name.value
+             whenDataReturns();
+        });
     },
     getColorURLSmallSquare: (whenDataReturns) => {
         const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?rgb=${rgbState.currentRandomColor}&format=json`
-        $.get(getURL)
-            .then(data => {
+        rgbState.urlPromise(getURL). then (data => {
                 rgbState.currentText = data.name.value
               whenDataReturns();
-          })
+          });
     },
     getColorURLPalette: (whenDataReturns) => {
         const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/scheme?rgb=${rgbState.currentRandomColor}&format=json&mode=${rgbState.paletteMode}&count=6`
-        $.get(getURL)
-            .then(data => {
-                if (rgbState.paletteToCopy.length > 5) {
-                    rgbState.paletteToCopy = []
-                }
-                for (let i= 0; i< data.colors.length; i++) {
-                    rgbState.paletteToShow.push(data.colors[i].rgb.value)
-                    rgbState.paletteToCopy.push(` ${data.colors[i].rgb.value}`)
-                    rgbState.paletteColorText.push(data.colors[i].name.value)
-            }
-                whenDataReturns();
-          })
+        rgbState.urlPromise(getURL).then(data => {
+            if (rgbState.paletteToCopy.length > 5) {
+                rgbState.paletteToCopy = []
+            };
+            for (let i= 0; i< data.colors.length; i++) {
+                rgbState.paletteToShow.push(data.colors[i].rgb.value)
+                rgbState.paletteToCopy.push(` ${data.colors[i].rgb.value}`)
+                rgbState.paletteColorText.push(data.colors[i].name.value)
+            };
+            whenDataReturns();
+        });
     }
 };
 
@@ -169,6 +173,7 @@ const customColorKeyPress = evt => {
         })
     }
 }
+// ADD FOR LOOPS!!!
 
 const paletteUpdate = () => {
     paletteHolder1.style.backgroundColor = rgbState.paletteToShow[0]
