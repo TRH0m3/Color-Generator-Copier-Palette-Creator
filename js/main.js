@@ -280,3 +280,10 @@ customColorInput.addEventListener('keypress', customColorKeyPress)
 createPaletteButton.addEventListener('click', onCreatePaletteButtonClick)
 paletteHolder.addEventListener('click', onPaletteClick)
 copyPaletteButton.addEventListener('click', onCopyPaletteButtonClick)
+// mobile touch events
+colorHolder.addEventListener('touch', genRanColor);
+clearButton.addEventListener('touch', clearColors)
+squareHolder.addEventListener('touch', copySmallSquareColor)
+createPaletteButton.addEventListener('touch', onCreatePaletteButtonClick)
+paletteHolder.addEventListener('touch', onPaletteClick)
+copyPaletteButton.addEventListener('touch', onCopyPaletteButtonClick)
