@@ -6,9 +6,38 @@
       <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
       <link href="css/main.css" rel="stylesheet" type="text/css"/>
-        <div class="row">
-          <nav class="navbar navbar-dark col pl-4" style="background-color: black"><a class="navbar-brand" href="index.html">Color Generator/Copier & Palette Creator</a></nav>
+        <nav class="navbar pl-2" style="background-color: black">
+            <div class="row">
+                <a class="navbar-brand col" href="#">Color Generator/Copier & Palette Creator</a>
+                <button class="btn btn-outline-primary col-2 p-0" data-toggle="modal" data-target="#myModal">About & How To Use</button>
+            </div>
+        </nav>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">About & How To Use</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h4><u>About:</u> </h4><p>This website was designed and created by Patrick Reese for a final project for Javascript Development at General Assembly.</p>
+                <h4><u>How To Use:</u> </h4>
+                <h5>To generate a random color:</h5>
+                <p>Click on the box labeled "Click to generate Random Color".</p>
+                <h5>To generate a chosen color:</h5>
+                <p>Type into the input a rgb(x,y,z) value and hit Enter.</p>
+                <h5>To display an already generated color:</h5>
+                <p>Click on the small color box, it will push to the big box up top.</p>
+                <h5>To create a palette from a color:</h5>
+                <p>Ensure a color is displayed up top, then click the palette option and "Create Palette".</p>
+                <div class ="danger p-2"><h5><b>Disclaimer:</b><br>Anytime a color is displayed in the big box, its rgb value is copied</h5></div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <title>Color Generator/Copier & Palette Creator</title>
     </head>
     <body>
@@ -34,42 +63,6 @@
         <p>Click Square Below to Copy Color</p>
         <div class="js-square-holder square-holder my-2 mx-auto"></div>
         <textarea class="js-copy-color copy-color"></textarea>
-    </div>
-    <footer class="page-footer w-100">
-        <div class="container-fluid">
-            <div class="row justify-content-between">
-                <div class="col-10 pl-2">
-                    <h5 class="title about  pt-2">About This Webpage:</h5>
-                    <p class="about-text">This website was designed and created by Patrick Reese for a final project for Javascript Development at General Assembly.</p>
-                </div>
-                <div class="col-2 text-right bg-light how-to-column pr-2">
-                    <button class="btn btn-outline-primary how-to mt-2" data-toggle="modal" data-target="#myModal">How To Use</button>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title" id="exampleModalLabel">How To Use</h2>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <h4>To generate a random color:</h4>
-            <p>Click on the box labeled "Click to generate Random Color".</p>
-            <h4>To generate a chosen color:</h4>
-            <p>Type into the input a rgb(x,y,z) value and hit Enter.</p>
-            <h4>To display an already generated color:</h4>
-            <p>Click on the small color box, it will push to the big box up top.</p>
-            <h4>To create a palette from a color:</h4>
-            <p>Ensure a color is displayed up top, then click the palette option and "Create Palette".</p>
-            <h3 class="text-danger"><b>Disclaimer:</b><br>Anytime a color is displayed in the big box, its rgb value is copied</h3>
-          </div>
-        </div>
-      </div>
     </div>
     <script  src ="js/main.js"></script>
       <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>

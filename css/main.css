@@ -10,11 +10,17 @@ nav {
     background-color: white;
     border-color: black;
     color: black;
+    font-size: 1.5vw;
 }
 .btn-outline-primary:hover {
     background-color: black;
     border-color: black;
     color: white;
+}
+.danger {
+    background-color: red;
+    border: 2px solid black;
+    border-radius: 2px;
 }
 .color-holder {
     height: 20vw;
@@ -56,18 +62,6 @@ nav {
 }
 .last-palette {
     border-radius: 0 5px 5px 0;
-}
-.page-footer {
-    background-color: black;
-    color: white;
-    position:absolute;
-    bottom:0;
-}
-.about {
-    font-size:2vw;
-}
-.about-text, .how-to {
-    font-size: 1.5vw;
 }
 /* Loader Styling */
 .loader,
