@@ -157,11 +157,6 @@ const customColorKeyPress = evt => {
             const customColor = customColorInput.value;
             rgbState.currentRandomColor = customColor;
             rgbState.appendSmallSquares();
-            squareHolder.innerHTML = '';
-            for (let i=0; i < rgbState.smallSquares.length; i++) {
-                squareHolder.innerHTML += `<div class="js-small-square small-square mr-1" style="background-color: ${rgbState.smallSquares[i]}"></div>`;
-                console.log(":hello");
-            };
             rgbState.currentText = customColor;
             rgbState.textToCopy = customColor;
             disable();
