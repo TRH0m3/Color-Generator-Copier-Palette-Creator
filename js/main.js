@@ -105,6 +105,8 @@ const enable = () => {
     createPaletteButton.removeAttribute('disabled');
     copyPaletteButton.removeAttribute('disabled');
     customColorInput.removeAttribute('disabled');
+    createPaletteButton.removeAttribute('disabled');
+    copyPaletteButton.removeAttribute('disabled');
     colorHolder.innerHTML = rgbState.currentText;
 };
 
