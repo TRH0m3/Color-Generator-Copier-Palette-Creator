@@ -43,7 +43,7 @@ const rgbState = {
                 });
         });
     },
-    // getColorURL: (whenDataReturns) => {
+     getColorURL: (whenDataReturns) => {
         const getURL = `https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?rgb=${rgbState.R},${rgbState.G},${rgbState.B}&format=json`;
         rgbState.urlPromise(getURL).then(data => {
              rgbState.currentText = data.name.value;
@@ -69,7 +69,7 @@ const rgbState = {
                 rgbState.paletteColorText.push(data.colors[i].name.value);
             };
             whenDataReturns();
-        }); //
+        });
     }
 };
 
